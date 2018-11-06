@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Generate : MonoBehaviour {
 	public Transform Ground;
-	public Transform[] obstacles; 
 	bool firstTime = true;
 	bool generated = false;  
 	Vector3 groundPos = new Vector3(0, 0, 12); 
@@ -18,16 +17,16 @@ public class Generate : MonoBehaviour {
 	void Update () {
 		groundPos = Ground.transform.position; 
 		playerPos = GameObject.Find("Player").transform.position; 
-		print("GROUND " + groundPos);
-		print("PLAYER " + playerPos);		
+		// print("GROUND " + groundPos);
+		// print("PLAYER " + playerPos);		
 		if (groundPos.z - playerPos.z > 10 && !generated) {
 			Ground = (Transform) Instantiate(Ground, new Vector3(groundPos.x, groundPos.y, groundPos.z + 50), Quaternion.identity);
 		generated = true;
-		print("NEW GROUND!");			
+		// print("NEW GROUND!");			
 		}
 		if (generated && playerPos.z >= groundPos.z - 20.0) {
 			generated = false; 
-			print("GENERATED FALSE"); 
+			// print("GENERATED FALSE"); 
 		}
 	}
 }

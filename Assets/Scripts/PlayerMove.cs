@@ -6,6 +6,8 @@ public class PlayerMove : MonoBehaviour {
 	bool clicked = false; 
 	private CharacterController controller; 
 	private Vector3 moveVector; 
+
+	private int speed = 1;
 	// Use this for initialization
 	void Start () {
 		controller = GetComponent<CharacterController>();	
@@ -19,9 +21,19 @@ public class PlayerMove : MonoBehaviour {
 
 		moveVector.y = 0; 
 
-		moveVector.z = 5.0f; 
+		moveVector.z = 7.0f * speed; 
 		
 		controller.Move(moveVector * Time.deltaTime); 
+
+		if(this.gameObject.transform.position.y > 0.6f) {
+			this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, 0.6f, this.gameObject.transform.position.z);  
+		}
+
+		if(PlayerCollisions.score % 50 == 0 ) {
+			speed = (PlayerCollisions.score / 50 + 1); 
+		}
+
+
 		// transform.Translate(0, 0, Time.deltaTime*3);
 		
 		
@@ -37,4 +49,5 @@ public class PlayerMove : MonoBehaviour {
 		// 	clicked = false; 
 		// }
 	}
+
 }
