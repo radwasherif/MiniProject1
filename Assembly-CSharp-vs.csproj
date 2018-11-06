@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\GenerateGround.cs" />
      <Compile Include="Assets\Scripts\AddObstacles.cs" />
+     <Compile Include="Assets\Scripts\CameraToggle.cs" />
      <Compile Include="Assets\Scripts\Destroy.cs" />
      <Compile Include="Assets\Scripts\DestroyOnCollision.cs" />
      <Compile Include="Assets\Scripts\Generate.cs" />
