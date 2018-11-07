@@ -29,4 +29,8 @@ public class Generate : MonoBehaviour {
 			// print("GENERATED FALSE"); 
 		}
 	}
+
+	public void Restart() {
+		
+	}
 }
