@@ -2,19 +2,25 @@
 using System.Collections;
 
 public class PlayerMove : MonoBehaviour {
-	int lane = 0; 
-	bool clicked = false; 
+	// int lane = 0; 
+	// bool clicked = false; 
 	private CharacterController controller; 
 	private Vector3 moveVector; 
-
+	public bool dead = false; 
 	private int speed = 1;
+	// private bool levelUp = false; 
 	// Use this for initialization
 	void Start () {
-		controller = GetComponent<CharacterController>();	
+		// speed = 1; 
+		// dead = false; 
+		controller = GetComponent<CharacterController>();
+		// print(GameObject.Find("Directional Light").gameObject.ToString()); 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if(dead)
+			return; 
 		moveVector = Vector3.zero; 
 
 		moveVector.x = Input.GetAxisRaw("Horizontal") * 3; 
@@ -29,10 +35,11 @@ public class PlayerMove : MonoBehaviour {
 			this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, 0.6f, this.gameObject.transform.position.z);  
 		}
 
-		if(PlayerCollisions.score % 50 == 0 ) {
+		if(PlayerCollisions.score % 50 == 0) {
 			speed = (PlayerCollisions.score / 50 + 1); 
 		}
 
+		// print("PLAYER: " + gameObject.transform.position); 
 
 		// transform.Translate(0, 0, Time.deltaTime*3);
 		
@@ -48,6 +55,10 @@ public class PlayerMove : MonoBehaviour {
 		// if(Input.GetAxis("Horizontal") == 0) {
 		// 	clicked = false; 
 		// }
+	}
+
+	public void SetDead(bool dead) {
+		this.dead = dead; 
 	}
 
 }
