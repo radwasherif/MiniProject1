@@ -48,9 +48,8 @@ public class PlayerMove : MonoBehaviour {
 			this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, 0.6f, this.gameObject.transform.position.z);  
 		}
 
-		if(PlayerCollisions.score % 50 == 0) {
-			speed = (PlayerCollisions.score / 50 + 1); 
-		}
+		speed = (PlayerCollisions.score / 50 + 1); 
+		
 
 		// print("PLAYER: " + gameObject.transform.position); 
 

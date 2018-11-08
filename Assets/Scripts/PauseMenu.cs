@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class PauseMenu : MonoBehaviour {
-	
+	public SoundManagerPlay soundManager; 
 	// Use this for initialization
 	void Start () {
 		gameObject.SetActive(false); 
@@ -28,6 +28,12 @@ public class PauseMenu : MonoBehaviour {
 	}
 
 	public void TogglePause() {
+		if(!gameObject.active) {
+			soundManager.MenuSound(); 
+		} else {
+			soundManager.GameSound(); 
+		}
 		gameObject.SetActive(!gameObject.active); 
+		
 	}
 }

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class DeathMenu : MonoBehaviour {
 	public Text finalScoreText;
+	public SoundManagerPlay soundManager; 
 	// Use this for initialization
 	void Start () {
 		gameObject.SetActive(false); 
@@ -21,5 +22,6 @@ public class DeathMenu : MonoBehaviour {
 
 	public void Dead() {
 		gameObject.SetActive(true); 
+		soundManager.MenuSound(); 
 	}
 }
