@@ -5,11 +5,16 @@ public class PlayerCollisions : MonoBehaviour {
 	public Text scoreText;
 	public static int score = 0; 
 	public DeathMenu deathMenu; 
-
+	private AudioSource colorChangeAudio, scoreGainAudio, scoreLossAudio; 
 	public Material red, green, blue; 
 	// Use this for initialization
 	void Start () {
-		scoreText.text = "Score: " + score; 
+		score = 0; 
+		scoreText.text = "Score: " + score;
+		AudioSource [] audios = GetComponents<AudioSource>(); 
+		colorChangeAudio = audios[0]; 
+		scoreGainAudio = audios[1]; 
+		scoreLossAudio = audios[2]; 
 	}
 	
 	// Update is called once per frame
@@ -26,15 +31,17 @@ public class PlayerCollisions : MonoBehaviour {
 			if( hisColor == myColor ){
 				// print("SAME MATERIAL");
 				score += 10; 
-				// print("Score " + score); 
+				scoreGainAudio.Play(); 
+				StartCoroutine(wait(scoreGainAudio.clip.length));  
 			} else {
 				score /=2;
+				scoreLossAudio.Play();
+				StartCoroutine(wait(scoreLossAudio.clip.length));  
 				// print("Score " + score); 
 				if (score == 0) {
-					GetComponent<PlayerMove>().SetDead(true);
+					PlayerMove.SetStop(true);
 					deathMenu.Dead(); 
 				}
-
 			}
 			GameObject.Destroy(c.gameObject); 
 		}
@@ -43,13 +50,30 @@ public class PlayerCollisions : MonoBehaviour {
 	void OnTriggerEnter(Collider c) {
 		if(c.gameObject.name == "RedLight") {
 			print("COLLISION RED LIGHT"); 
-			GetComponent<Renderer>().material = red; 
+			if(GetComponent<Renderer>().material != red) {
+				GetComponent<Renderer>().material = red;
+				colorChangeAudio.Play(); 
+				StartCoroutine(wait(colorChangeAudio.clip.length));  
+			}
 		} else if(c.gameObject.name == "BlueLight") {
 			print("COLLISION BLUE LIGHT"); 
-			GetComponent<Renderer>().material = blue; 
+			if(GetComponent<Renderer>().material != blue) {
+				GetComponent<Renderer>().material = blue;
+				colorChangeAudio.Play(); 
+				StartCoroutine(wait(colorChangeAudio.clip.length));  
+			} 
 		} else if(c.gameObject.name == "GreenLight") {
 			print("COLLISION GREEN LIGHT"); 
-			GetComponent<Renderer>().material = green; 
+			if(GetComponent<Renderer>().material != green) {
+				GetComponent<Renderer>().material = green;
+				colorChangeAudio.Play(); 
+				StartCoroutine(wait(colorChangeAudio.clip.length));  
+			}
+			
 		}
+	}
+
+	private IEnumerator wait(float seconds) {
+		yield return new WaitForSeconds(seconds); 
 	}
 }

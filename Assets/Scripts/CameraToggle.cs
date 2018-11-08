@@ -12,8 +12,12 @@ public class CameraToggle : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.C)) {
-			top.enabled = !top.enabled; 
-			thirdPerson.enabled = !thirdPerson.enabled; 
+			ToggleCamera(); 	 
 		}
 	}
-}
+
+	public void ToggleCamera() {
+		top.enabled = !top.enabled; 
+		thirdPerson.enabled = !thirdPerson.enabled;
+	}
+ }

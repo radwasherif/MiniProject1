@@ -6,25 +6,38 @@ public class PlayerMove : MonoBehaviour {
 	// bool clicked = false; 
 	private CharacterController controller; 
 	private Vector3 moveVector; 
-	public bool dead = false; 
+	public static bool stopped = false; 
+	public PauseMenu pauseMenu; 
+	bool clicked = false; 
 	private int speed = 1;
 	// private bool levelUp = false; 
 	// Use this for initialization
 	void Start () {
-		// speed = 1; 
-		// dead = false; 
+		speed = 1; 
+		stopped = false; 
 		controller = GetComponent<CharacterController>();
 		// print(GameObject.Find("Directional Light").gameObject.ToString()); 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(dead)
+		if(Input.GetAxisRaw("Cancel") == 1 && !clicked) {
+			Pause(); 
+			clicked = true; 	 
+		} 
+		if(Input.GetAxisRaw("Cancel") == 0) {
+			clicked = false; 
+		}
+		if(stopped)
 			return; 
 		moveVector = Vector3.zero; 
 
-		moveVector.x = Input.GetAxisRaw("Horizontal") * 3; 
-
+		if(Application.platform == RuntimePlatform.Android) {
+			moveVector.x = Input.acceleration.x; 
+		} else {
+			moveVector.x = Input.GetAxisRaw("Horizontal") * 3; 
+		}
+		
 		moveVector.y = 0; 
 
 		moveVector.z = 7.0f * speed; 
@@ -57,8 +70,13 @@ public class PlayerMove : MonoBehaviour {
 		// }
 	}
 
-	public void SetDead(bool dead) {
-		this.dead = dead; 
+	public static void SetStop(bool s) {
+		stopped = s; 
 	}
 
+	public void Pause() { 
+		stopped = !stopped; 
+		pauseMenu.TogglePause();
+	}
+ 
 }
