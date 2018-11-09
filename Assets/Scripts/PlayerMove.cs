@@ -32,11 +32,9 @@ public class PlayerMove : MonoBehaviour {
 			return; 
 		moveVector = Vector3.zero; 
 
-		if(Application.platform == RuntimePlatform.Android) {
-			moveVector.x = Input.acceleration.x; 
-		} else {
-			moveVector.x = Input.GetAxisRaw("Horizontal") * 3; 
-		}
+		moveVector.x = Input.acceleration.x * 3; 
+		moveVector.x = Input.GetAxisRaw("Horizontal") * 3; 
+		
 		
 		moveVector.y = 0; 
 
