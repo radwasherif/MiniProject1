@@ -31,12 +31,17 @@ public class PlayerCollisions : MonoBehaviour {
 			if( hisColor == myColor ){
 				// print("SAME MATERIAL");
 				score += 10; 
-				scoreGainAudio.Play(); 
-				StartCoroutine(wait(scoreGainAudio.clip.length));  
+				if(!SoundManager.mute) {
+					scoreGainAudio.Play(); 
+					StartCoroutine(wait(scoreGainAudio.clip.length));
+				}
+				  
 			} else {
 				score /=2;
-				scoreLossAudio.Play();
-				StartCoroutine(wait(scoreLossAudio.clip.length));  
+				if(!SoundManager.mute) {
+					scoreLossAudio.Play();
+					StartCoroutine(wait(scoreLossAudio.clip.length));  
+				}
 				// print("Score " + score); 
 				if (score == 0) {
 					PlayerMove.SetStop(true);
@@ -50,24 +55,30 @@ public class PlayerCollisions : MonoBehaviour {
 	void OnTriggerEnter(Collider c) {
 		if(c.gameObject.name == "RedLight") {
 			print("COLLISION RED LIGHT"); 
-			if(GetComponent<Renderer>().material != red) {
+			if(GetComponent<Renderer>().material.color != red.color) {
 				GetComponent<Renderer>().material = red;
-				colorChangeAudio.Play(); 
-				StartCoroutine(wait(colorChangeAudio.clip.length));  
+				if(!SoundManager.mute) {
+					colorChangeAudio.Play(); 
+					StartCoroutine(wait(colorChangeAudio.clip.length));  
+				}
 			}
 		} else if(c.gameObject.name == "BlueLight") {
 			print("COLLISION BLUE LIGHT"); 
-			if(GetComponent<Renderer>().material != blue) {
+			if(GetComponent<Renderer>().material.color != blue.color) {
 				GetComponent<Renderer>().material = blue;
-				colorChangeAudio.Play(); 
-				StartCoroutine(wait(colorChangeAudio.clip.length));  
+				if(!SoundManager.mute) {
+					colorChangeAudio.Play(); 
+					StartCoroutine(wait(colorChangeAudio.clip.length));  
+				}  
 			} 
 		} else if(c.gameObject.name == "GreenLight") {
 			print("COLLISION GREEN LIGHT"); 
-			if(GetComponent<Renderer>().material != green) {
+			if(GetComponent<Renderer>().material.color != green.color) {
 				GetComponent<Renderer>().material = green;
-				colorChangeAudio.Play(); 
-				StartCoroutine(wait(colorChangeAudio.clip.length));  
+				if(!SoundManager.mute) {
+					colorChangeAudio.Play(); 
+					StartCoroutine(wait(colorChangeAudio.clip.length));  
+				}
 			}
 			
 		}

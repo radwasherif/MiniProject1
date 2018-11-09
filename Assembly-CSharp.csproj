@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\AddObstacles.cs" />
+     <Compile Include="Assets\Scripts\AndroidButtons.cs" />
      <Compile Include="Assets\Scripts\CameraToggle.cs" />
      <Compile Include="Assets\Scripts\DeathMenu.cs" />
      <Compile Include="Assets\Scripts\Destroy.cs" />
